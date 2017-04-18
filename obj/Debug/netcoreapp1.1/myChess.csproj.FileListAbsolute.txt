@@ -1,0 +1,8 @@
+c:\Users\Riccardo\Desktop\C# Projects\myChess\bin\Debug\netcoreapp1.1\myChess.deps.json
+c:\Users\Riccardo\Desktop\C# Projects\myChess\bin\Debug\netcoreapp1.1\myChess.runtimeconfig.json
+c:\Users\Riccardo\Desktop\C# Projects\myChess\bin\Debug\netcoreapp1.1\myChess.runtimeconfig.dev.json
+c:\Users\Riccardo\Desktop\C# Projects\myChess\bin\Debug\netcoreapp1.1\myChess.dll
+c:\Users\Riccardo\Desktop\C# Projects\myChess\bin\Debug\netcoreapp1.1\myChess.pdb
+c:\Users\Riccardo\Desktop\C# Projects\myChess\obj\Debug\netcoreapp1.1\myChess.AssemblyInfo.cs
+c:\Users\Riccardo\Desktop\C# Projects\myChess\obj\Debug\netcoreapp1.1\myChess.dll
+c:\Users\Riccardo\Desktop\C# Projects\myChess\obj\Debug\netcoreapp1.1\myChess.pdb
