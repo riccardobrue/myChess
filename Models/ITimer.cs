@@ -5,8 +5,8 @@ namespace myChess.Models
 
     public interface ITimer
     {
-        DateTime TimePlayer1 { get; set; }
-        DateTime TimePlayer2 { get; set; }
+        TimeSpan TimeLeftPlayer1 { get; set; }
+        TimeSpan TimeLeftPlayer2 { get; set; }
 
 
     }
