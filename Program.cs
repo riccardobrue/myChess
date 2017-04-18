@@ -1,4 +1,5 @@
 ﻿using System;
+using myChess.Models;
 
 namespace myChess
 {
@@ -6,7 +7,14 @@ namespace myChess
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ITimer timer=new Timer();
+            timer.TurnOn();
+            timer.Start();
+            
+            
+
+            Console.WriteLine($"Time 1: {timer.TimeLeftPlayer1}");
+            Console.ReadKey();
             
         }
     }

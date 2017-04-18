@@ -14,6 +14,7 @@ namespace myChess.Models
         void TurnOn();
         void TurnOff();
         void Start();
+        void Reset();
         void Pause();
 
         //events
