@@ -2,9 +2,9 @@ namespace myChess.Models
 {
     public interface IHouse
     {
-        Column column { get; }
-        Row row { get; }
-        IPiece locatedPiece { get; set; }
+        Column Column { get; }
+        Row Row { get; }
+        IPiece LocatedPiece { get; set; }
 
     }
 }

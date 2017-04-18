@@ -2,9 +2,9 @@ namespace myChess.Models
 {
     public interface IPlayer
     {
-        string name { get; set; }
-        int score { get; set; }
-        bool inTurn { get; set; }
+        string Name { get; set; }
+        int Score { get; set; }
+        bool InTurn { get; set; }
 
     }
 }

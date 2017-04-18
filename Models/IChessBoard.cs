@@ -2,6 +2,6 @@ namespace myChess.Models
 {
     public interface IChessBoard
     {
-          IHouse[] houses{get;}
+          IHouse[] Houses{get;}
     }
 }

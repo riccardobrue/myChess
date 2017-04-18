@@ -1,10 +1,13 @@
+using System;
+
 namespace myChess.Models
 {
 
     public interface ITimer
     {
-        System.DateTime time { get; set; }
-        
+        DateTime TimePlayer1 { get; set; }
+        DateTime TimePlayer2 { get; set; }
+
 
     }
 
