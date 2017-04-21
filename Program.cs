@@ -7,6 +7,9 @@ namespace myChess
     {
         static void Main(string[] args)
         {
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
+            
             ITimer timer=new Timer();
             timer.TurnOn();
             timer.Start();

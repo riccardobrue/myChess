@@ -12,13 +12,18 @@ namespace myChess.Models
         private DateTime startingTime;
         private TimeSpan timeLeftPlayer1;
         private TimeSpan timeLeftPlayer2;
+        private bool paused;
 
         //public variables
         public TimeSpan TimeLeftPlayer1
         {
             get
             {
-                timeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                if (!paused)
+                {
+                    timeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                }
+
                 return timeLeftPlayer1;
             }
             private set
@@ -31,7 +36,11 @@ namespace myChess.Models
         {
             get
             {
-                timeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                if (!paused)
+                {
+                    timeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                }
+
                 return timeLeftPlayer2;
             }
             private set
@@ -71,6 +80,7 @@ namespace myChess.Models
 
         public void Start()
         {
+            paused = false;
             startingTime = DateTime.Now;
         }
 
@@ -78,6 +88,7 @@ namespace myChess.Models
         {
             TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins);
             TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins);
+            paused = true;
         }
 
 
