@@ -8,20 +8,21 @@ namespace myChess.Models
         private const int InitialTimeInMins = 5;
 
         //private variables
-        private PlayerTurn playerTurn = PlayerTurn.Player1Turn;
+        private PlayerTurn playerTurn;
         private DateTime startingTime;
         private TimeSpan timeLeftPlayer1;
         private TimeSpan timeLeftPlayer2;
-        private bool paused;
+        private bool paused, turnedOn;
 
         //public variables
         public TimeSpan TimeLeftPlayer1
         {
             get
             {
-                if (!paused)
+                if (!paused && playerTurn == PlayerTurn.Player1Turn)
                 {
-                    timeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                    //TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                    TimeLeftPlayer1 = timeLeftPlayer1 - (DateTime.Now - startingTime);
                 }
 
                 return timeLeftPlayer1;
@@ -36,9 +37,10 @@ namespace myChess.Models
         {
             get
             {
-                if (!paused)
+                if (!paused && playerTurn == PlayerTurn.Player2Turn)
                 {
-                    timeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                    //TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                    TimeLeftPlayer2 = timeLeftPlayer2 - (DateTime.Now - startingTime);
                 }
 
                 return timeLeftPlayer2;
@@ -51,7 +53,7 @@ namespace myChess.Models
 
 
 
-        public PlayerTurn TurnChangerButton
+        public PlayerTurn CurrentPlayerTurn
         {
             get
             {
@@ -67,28 +69,62 @@ namespace myChess.Models
 
         public void TurnOn()
         {
+            turnedOn = true;
             Reset();
         }
         public void TurnOff()
         {
+            turnedOn = false;
             throw new NotImplementedException();
         }
         public void Pause()
         {
-            throw new NotImplementedException();
+            if (paused)
+            {
+                throw new InvalidOperationException();
+            }
+            if (playerTurn == PlayerTurn.Player1Turn)
+            {
+                TimeLeftPlayer1 = timeLeftPlayer1 - (DateTime.Now - startingTime);
+            }
+            else
+            {
+                TimeLeftPlayer2 = timeLeftPlayer2 - (DateTime.Now - startingTime);
+            }
+            paused = true;
+
         }
 
         public void Start()
         {
+            if (!turnedOn)
+            {
+                throw new InvalidOperationException();
+            }
+
             paused = false;
-            startingTime = DateTime.Now;
+            startingTime = DateTime.Now;    //this is the piece of code which allows to avoid pause times
         }
 
         public void Reset()
         {
+            if (!turnedOn)
+            {
+                throw new InvalidOperationException();
+            }
             TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins);
             TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins);
             paused = true;
+            playerTurn = PlayerTurn.Player1Turn;
+        }
+
+        public void SwitchPlayerTurn()
+        {
+            if (CurrentPlayerTurn == PlayerTurn.Player1Turn)
+            {
+                CurrentPlayerTurn = PlayerTurn.Player2Turn;
+            }
+            else { CurrentPlayerTurn = PlayerTurn.Player1Turn; }
         }
 
 

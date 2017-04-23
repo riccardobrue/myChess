@@ -8,7 +8,7 @@ namespace myChess.Models
         //properties
         TimeSpan TimeLeftPlayer1 { get; }
         TimeSpan TimeLeftPlayer2 { get; }
-        PlayerTurn TurnChangerButton { get; set; }
+        PlayerTurn CurrentPlayerTurn { get; set; }
 
         //methods
         void TurnOn();
@@ -16,6 +16,7 @@ namespace myChess.Models
         void Start();
         void Reset();
         void Pause();
+        void SwitchPlayerTurn();
 
         //events
         event EventHandler TimeIsUp;
