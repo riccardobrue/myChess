@@ -9,15 +9,15 @@ namespace myChess.Tests
     public class TimerTest
     {
         [Fact]
-        public void BothPlayerTimersSettedAt5Mins()
+        public void BothPlayerTimersSettedAtInitialTime()
         {
             //Given
             ITimer timer = new Models.Timer();
             //When
             timer.TurnOn();
             //Then
-            Assert.Equal(TimeSpan.FromMinutes(5), timer.TimeLeftPlayer1);
-            Assert.Equal(TimeSpan.FromMinutes(5), timer.TimeLeftPlayer2);
+            Assert.Equal(TimeSpan.FromMinutes(Models.Timer.initialDefaultTime), timer.TimeLeftPlayer1);
+            Assert.Equal(TimeSpan.FromMinutes(Models.Timer.initialDefaultTime), timer.TimeLeftPlayer2);
         }
 
         [Fact]
@@ -99,8 +99,8 @@ namespace myChess.Tests
             TimeSpan firstTimePlayer1 = timer.TimeLeftPlayer1;
             TimeSpan firstTimePlayer2 = timer.TimeLeftPlayer2;
             //Then
-            Assert.Equal(firstTimePlayer2, TimeSpan.FromMinutes(5));    //player 2 still have 5 minutes (initial time)
-            Assert.True(firstTimePlayer1.TotalMilliseconds <= TimeSpan.FromMinutes(5).TotalMilliseconds - 200); //player 1 time is decreased
+            Assert.Equal(firstTimePlayer2, TimeSpan.FromMinutes(Models.Timer.initialDefaultTime));    //player 2 still have 5 minutes (initial time)
+            Assert.True(firstTimePlayer1.TotalMilliseconds <= TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 200); //player 1 time is decreased
             //And When
             timer.SwitchPlayerTurn();   //SWITCH (Player 2)
             timer.Start();
@@ -131,21 +131,78 @@ namespace myChess.Tests
             Assert.True(timer.TimeLeftPlayer2.TotalMilliseconds <= thirdTimePlayer2.TotalMilliseconds - 600); //player 1 time is decreased
 
             //LAST THEN
-            Assert.True(timer.TimeLeftPlayer1.TotalMilliseconds <= TimeSpan.FromMinutes(5).TotalMilliseconds - 600); //player 1 time is decreased by the sum from the game start (200+400)
-            Assert.True(timer.TimeLeftPlayer2.TotalMilliseconds <= TimeSpan.FromMinutes(5).TotalMilliseconds - 900); //player 2 time is decreased by the sum from the game start (600+300)
-           
+            Assert.True(timer.TimeLeftPlayer1.TotalMilliseconds <= TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 600); //player 1 time is decreased by the sum from the game start (200+400)
+            Assert.True(timer.TimeLeftPlayer2.TotalMilliseconds <= TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 900); //player 2 time is decreased by the sum from the game start (600+300)
+
             Assert.InRange(
                 timer.TimeLeftPlayer1,
                 TimeSpan.FromMilliseconds(0),
-                TimeSpan.FromMilliseconds(TimeSpan.FromMinutes(5).TotalMilliseconds - 600)
+                TimeSpan.FromMilliseconds(TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 600)
             );
             Assert.InRange(
                 timer.TimeLeftPlayer2,
                 TimeSpan.FromMilliseconds(0),
-                TimeSpan.FromMilliseconds(TimeSpan.FromMinutes(5).TotalMilliseconds - 900)
+                TimeSpan.FromMilliseconds(TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 900)
             );
-            
+
         }
+
+        [Fact]
+        public void FiveMinutesAfterReset()
+        {
+            //Given
+            ITimer timer = new Models.Timer();
+            //When
+            timer.TurnOn(); //(Player 1)
+            timer.Start();
+            Thread.Sleep(600);
+            timer.SwitchPlayerTurn();   //SWITCH (Player 2)
+            Thread.Sleep(800);
+            timer.Pause();
+            //Then
+            Assert.True(
+                timer.TimeLeftPlayer1.TotalMilliseconds <= TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 600); //player 1 time is decreased by the sum from the game start (200+400)
+            Assert.True(
+                timer.TimeLeftPlayer2.TotalMilliseconds <= TimeSpan.FromMinutes(Models.Timer.initialDefaultTime).TotalMilliseconds - 800); //player 2 time is decreased by the sum from the game start (600+300)
+
+            //And When
+            timer.Reset();
+            Thread.Sleep(300);
+            //Then
+            Assert.Equal(timer.TimeLeftPlayer1, TimeSpan.FromMinutes(Models.Timer.initialDefaultTime));
+            Assert.Equal(timer.TimeLeftPlayer2, TimeSpan.FromMinutes(Models.Timer.initialDefaultTime));
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenStartBeforeTurnOn()
+        {
+            //Given
+            ITimer timer = new Models.Timer();
+            //When & Then
+            Assert.Throws(typeof(InvalidOperationException), () => { timer.Start(); });//lambda expression
+        }
+
+        [Fact]
+        public void ThrowTimeIsUpEvent()
+        {
+            //Given
+            ITimer timer = new Models.Timer(TimeSpan.FromMilliseconds(500));
+            //When
+            timer.TurnOn();
+            timer.Start();
+
+            //Then
+            bool invoked = false;
+            timer.TimeIsUp += (sender, args) =>
+            {
+                invoked = true;
+            };
+            Thread.Sleep(2000);
+            Assert.True(invoked);
+        }
+
+
+
 
 
     }

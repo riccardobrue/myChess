@@ -5,14 +5,38 @@ namespace myChess.Models
     public class Timer : ITimer
     {
         //private constants
-        private const int InitialTimeInMins = 5;
+        public const int initialDefaultTime = 5;
+
 
         //private variables
+        private TimeSpan initialTime;
+        private System.Threading.Timer sysTimer;
         private PlayerTurn playerTurn;
         private DateTime startingTime;
         private TimeSpan timeLeftPlayer1;
         private TimeSpan timeLeftPlayer2;
         private bool paused, turnedOn;
+
+        //constructor
+        public Timer() : this(TimeSpan.FromMinutes(initialDefaultTime)) { }
+        public Timer(TimeSpan initialTime)
+        {
+            this.initialTime = initialTime;
+            sysTimer = new System.Threading.Timer(
+                checkTimeLeft,
+                null,
+                TimeSpan.Zero,
+                TimeSpan.FromSeconds(1));
+        }
+
+        private void checkTimeLeft(object state)
+        {
+            if (TimeLeftPlayer1 <= TimeSpan.Zero ||
+            TimeLeftPlayer2 <= TimeSpan.Zero)
+            {
+                TimeIsUp?.Invoke(this,null);
+            }
+        }
 
         //public variables
         public TimeSpan TimeLeftPlayer1
@@ -81,7 +105,7 @@ namespace myChess.Models
         {
             if (paused)
             {
-                throw new InvalidOperationException();
+                return;
             }
             if (playerTurn == PlayerTurn.Player1Turn)
             {
@@ -112,19 +136,21 @@ namespace myChess.Models
             {
                 throw new InvalidOperationException();
             }
-            TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins);
-            TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins);
+            TimeLeftPlayer1 = initialTime;
+            TimeLeftPlayer2 = initialTime;
             paused = true;
             playerTurn = PlayerTurn.Player1Turn;
         }
 
         public void SwitchPlayerTurn()
         {
+            Pause();
             if (CurrentPlayerTurn == PlayerTurn.Player1Turn)
             {
                 CurrentPlayerTurn = PlayerTurn.Player2Turn;
             }
             else { CurrentPlayerTurn = PlayerTurn.Player1Turn; }
+            Start();
         }
 
 
