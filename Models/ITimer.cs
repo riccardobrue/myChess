@@ -6,8 +6,8 @@ namespace myChess.Models
     public interface ITimer
     {
         //properties
-        TimeSpan TimeLeftPlayer1 { get; }
-        TimeSpan TimeLeftPlayer2 { get; }
+        TimeSpan TimeLeftPlayerBlack { get; }
+        TimeSpan TimeLeftPlayerWhite { get; }
         PlayerTurn CurrentPlayerTurn { get; set; }
 
         //methods
@@ -19,7 +19,7 @@ namespace myChess.Models
         void SwitchPlayerTurn();
 
         //events
-        event EventHandler TimeIsUp;
+        event EventHandler<Color> TimeIsUp;
 
 
     }

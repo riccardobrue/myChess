@@ -13,14 +13,15 @@ namespace myChess.Models
         private System.Threading.Timer sysTimer;
         private PlayerTurn playerTurn;
         private DateTime startingTime;
-        private TimeSpan timeLeftPlayer1;
-        private TimeSpan timeLeftPlayer2;
+        private TimeSpan timeLeftPlayerBlack;
+        private TimeSpan timeLeftPlayerWhite;
         private bool paused, turnedOn;
 
         //constructor
         public Timer() : this(TimeSpan.FromMinutes(initialDefaultTime)) { }
         public Timer(TimeSpan initialTime)
         {
+            paused=true;
             this.initialTime = initialTime;
             sysTimer = new System.Threading.Timer(
                 checkTimeLeft,
@@ -31,47 +32,57 @@ namespace myChess.Models
 
         private void checkTimeLeft(object state)
         {
-            if (TimeLeftPlayer1 <= TimeSpan.Zero ||
-            TimeLeftPlayer2 <= TimeSpan.Zero)
+            if (paused)
             {
-                TimeIsUp?.Invoke(this,null);
+                return;
             }
+            Pause();
+
+            if (TimeLeftPlayerBlack <= TimeSpan.Zero)
+            {
+                TimeIsUp?.Invoke(this, Color.Black);
+            }
+            else if (TimeLeftPlayerWhite <= TimeSpan.Zero)
+            {
+                TimeIsUp?.Invoke(this, Color.White);
+            }
+            Start();
         }
 
         //public variables
-        public TimeSpan TimeLeftPlayer1
+        public TimeSpan TimeLeftPlayerBlack
         {
             get
             {
                 if (!paused && playerTurn == PlayerTurn.Player1Turn)
                 {
                     //TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
-                    TimeLeftPlayer1 = timeLeftPlayer1 - (DateTime.Now - startingTime);
+                    TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
                 }
 
-                return timeLeftPlayer1;
+                return timeLeftPlayerBlack;
             }
             private set
             {
-                timeLeftPlayer1 = value;
+                timeLeftPlayerBlack = value;
             }
         }
 
-        public TimeSpan TimeLeftPlayer2
+        public TimeSpan TimeLeftPlayerWhite
         {
             get
             {
                 if (!paused && playerTurn == PlayerTurn.Player2Turn)
                 {
                     //TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
-                    TimeLeftPlayer2 = timeLeftPlayer2 - (DateTime.Now - startingTime);
+                    TimeLeftPlayerWhite = timeLeftPlayerWhite - (DateTime.Now - startingTime);
                 }
 
-                return timeLeftPlayer2;
+                return timeLeftPlayerWhite;
             }
             private set
             {
-                timeLeftPlayer2 = value;
+                timeLeftPlayerWhite = value;
             }
         }
 
@@ -109,11 +120,11 @@ namespace myChess.Models
             }
             if (playerTurn == PlayerTurn.Player1Turn)
             {
-                TimeLeftPlayer1 = timeLeftPlayer1 - (DateTime.Now - startingTime);
+                TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
             }
             else
             {
-                TimeLeftPlayer2 = timeLeftPlayer2 - (DateTime.Now - startingTime);
+                TimeLeftPlayerWhite = timeLeftPlayerWhite - (DateTime.Now - startingTime);
             }
             paused = true;
 
@@ -136,8 +147,8 @@ namespace myChess.Models
             {
                 throw new InvalidOperationException();
             }
-            TimeLeftPlayer1 = initialTime;
-            TimeLeftPlayer2 = initialTime;
+            TimeLeftPlayerBlack = initialTime;
+            TimeLeftPlayerWhite = initialTime;
             paused = true;
             playerTurn = PlayerTurn.Player1Turn;
         }
@@ -155,6 +166,11 @@ namespace myChess.Models
 
 
         //public events
-        public event EventHandler TimeIsUp;
+        public event EventHandler<Color> TimeIsUp;
+
+        //override methods
+        public override string ToString(){
+            return $"Timer[{this.initialTime}]";
+        }
     }
 }
