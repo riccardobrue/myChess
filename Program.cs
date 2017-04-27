@@ -8,8 +8,8 @@ namespace myChess
     {
         static void Main(string[] args)
         {
-            //SimpleXUnitRunner.SimpleXUnit.RunTests();
-            //Console.ReadKey();
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
 
             ITimer timer = new Models.Timer(TimeSpan.FromSeconds(5));
             /*

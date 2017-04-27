@@ -1,3 +1,5 @@
+using myChess.Models.Pieces;
+
 namespace myChess.Models
 {
     public interface IHouse
