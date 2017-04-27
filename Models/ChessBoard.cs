@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using myChess.Models.Pieces;
 
 namespace myChess.Models
 {
@@ -27,11 +28,62 @@ namespace myChess.Models
         {
             housesList = Enumerable
             .Range(0, 64) //list of 64 elements (index from 0 to 63)
-            .Select(index => (IHouse)new House((Column)(index % 8 + 1),
-                                                (Row)(index / 8 + 1)))
+            //.Select(index => new House((Column)(index % 8 + 1), (Row)(index / 8 + 1)))
+            .Select(index => CreateHouse(index))
             .ToArray();
 
 
+
+        }
+
+        internal IHouse CreateHouse(int index)
+        {
+            Column column = (Column)(index % 8 + 1);
+            Row row = (Row)(index / 8 + 1);
+            IHouse house = new House(column, row);
+
+            if (row == Row.Second)
+            {
+                house.PieceInLocation = new Pawn(Color.White);
+            }
+            else if (row == Row.Seventh)
+            {
+                house.PieceInLocation = new Pawn(Color.Black);
+            }
+            else if (row == Row.First || row==Row.Eighth)
+            {
+                Color color = (row == Row.First) ? Color.White : Color.Black;
+
+                switch (column)
+                {
+                    case Column.A:
+                        house.PieceInLocation = new Rook(color);
+                        break;
+                    case Column.B:
+                        house.PieceInLocation = new Knight(color);
+                        break;
+                    case Column.C:
+                        house.PieceInLocation = new Bishop(color);
+                        break;
+                    case Column.D:
+                        house.PieceInLocation = new Queen(color);
+                        break;
+                    case Column.E:
+                        house.PieceInLocation = new King(color);
+                        break;
+                    case Column.F:
+                        house.PieceInLocation = new Bishop(color);
+                        break;
+                    case Column.G:
+                        house.PieceInLocation = new Knight(color);
+                        break;
+                    case Column.H:
+                        house.PieceInLocation = new Rook(color);
+                        break;
+                }
+            }
+
+            return house;
         }
 
         public IHouse this[Column column, Row row]
