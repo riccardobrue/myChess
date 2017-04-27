@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace myChess.Models
 {
     public interface IChessBoard
     {
-          IHouse[] Houses{get; set;}
+        IEnumerable<IHouse> Houses { get; }
+        IHouse this[Column column, Row row] { get; }
     }
 }
