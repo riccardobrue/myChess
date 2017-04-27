@@ -27,6 +27,8 @@ namespace myChess.Models.Pieces
         {
             var columnDifference = (int)StartingColumn - (int)DestinationColumn;
             var rowDifference = (int)StartingRow - (int)DestinationRow;
+            
+            if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if (Math.Abs(rowDifference) == 2)
             {

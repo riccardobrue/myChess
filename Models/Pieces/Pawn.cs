@@ -25,8 +25,13 @@ namespace myChess.Models.Pieces
             Row DestinationRow,
             IChessBoard ChessBoard = null)
         {
+            var columnDifference = (int)StartingColumn - (int)DestinationColumn;
+            var rowDifference = (int)StartingRow - (int)DestinationRow;
+
             bool sameColumn = StartingColumn == DestinationColumn;
             int rowsDistance;
+
+            if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if (Color == Color.White)
             {

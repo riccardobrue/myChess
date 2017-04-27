@@ -6,7 +6,7 @@ namespace myChess.Models
     {
         Column Column { get; }
         Row Row { get; }
-        IPiece LocatedPiece { get; set; }
+        IPiece PieceInLocation { get; set; }
 
     }
 }

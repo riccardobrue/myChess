@@ -31,6 +31,7 @@ namespace myChess.Models.Pieces
             bool sameColumn = StartingColumn == DestinationColumn;
             bool sameRow = StartingRow == DestinationRow;
 
+            if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if ((sameColumn && !sameRow)//vertical movement
                 || (sameRow && !sameColumn)//horizontal movement
