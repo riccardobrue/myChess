@@ -8,7 +8,7 @@ using Xunit;
 namespace myChess.Tests
 {
 
-    public class PiecesTest
+    public class PiecesTests
     {
         [Fact]
         public void PawnCanMoveOneSTepForward()

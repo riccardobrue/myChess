@@ -11,8 +11,8 @@ namespace myChess
     {
         static void Main(string[] args)
         {
-            //SimpleXUnitRunner.SimpleXUnit.RunTests();
-            //Console.ReadKey();
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
 
             //ITimer timer = new Models.Timer(TimeSpan.FromSeconds(5));
             /*
@@ -62,6 +62,7 @@ namespace myChess
                 IPiece piece = house.PieceInLocation;
                 Console.WriteLine($"{piece.Color} - {piece.GetType().ToString()}");
             }
+
 
 
 

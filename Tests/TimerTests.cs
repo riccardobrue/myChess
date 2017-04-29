@@ -6,7 +6,7 @@ using Xunit;
 namespace myChess.Tests
 {
 
-    public class TimerTest
+    public class TimerTests
     {
         [Fact]
         public void BothPlayerTimersSettedAtInitialTime()
