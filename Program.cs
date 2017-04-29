@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading;
 using myChess.Models;
+using myChess.Extensions;
+using System.Collections.Generic;
+using myChess.Models.Pieces;
 
 namespace myChess
 {
@@ -8,10 +11,10 @@ namespace myChess
     {
         static void Main(string[] args)
         {
-            SimpleXUnitRunner.SimpleXUnit.RunTests();
-            Console.ReadKey();
+            //SimpleXUnitRunner.SimpleXUnit.RunTests();
+            //Console.ReadKey();
 
-            ITimer timer = new Models.Timer(TimeSpan.FromSeconds(5));
+            //ITimer timer = new Models.Timer(TimeSpan.FromSeconds(5));
             /*
             //METHOD 1
             timer.TimeIsUp += notifyDefeat;
@@ -24,6 +27,7 @@ namespace myChess
             };
             */
             //METHOD 3
+            /* 
             EventHandler<Color> notifyDefeat = (object sender, Color color) =>
             {
                 Console.WriteLine($"{sender.ToString()} - TIME IS UP! Player with {color} color has been defeated!");
@@ -46,6 +50,20 @@ namespace myChess
             Console.WriteLine($"Time 4: {timer.TimeLeftPlayerBlack}");
             Thread.Sleep(1000);
             Console.WriteLine($"Time 5: {timer.TimeLeftPlayerBlack}");
+            */
+
+            IChessBoard chessboard = new ChessBoard();
+            IEnumerable<IHouse> list = chessboard.Houses
+                .WithPieces()
+                .PiecesType<Pawn>();
+
+            foreach (House house in list)
+            {
+                IPiece piece = house.PieceInLocation;
+                Console.WriteLine($"{piece.Color} - {piece.GetType().ToString()}");
+            }
+
+
 
             Console.ReadKey();
 
