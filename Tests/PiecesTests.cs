@@ -51,35 +51,37 @@ namespace myChess.Tests
         //----------------------------------------------
         //----------------------------------------------
         //----------------------------------------------
-/*
+
         [Fact]
         public void PawnCanMoveDiagonallyIfCapturesAPiece()
         {
 
             //Given
-            IPiece pawn = new Pawn(Color.White);
+            IPiece whitePawn = new Pawn(Color.White);
+            IPiece blackPawn = new Pawn(Color.Black);
 
             IEnumerable<IHouse> housesList = new List<House>{
                 new House(Column.A,Row.First){
-                    PieceIsInLocation = pawn
-                },
+                        PieceInLocation=whitePawn
+                    },
                 new House(Column.B,Row.Second){
-                    PieceIsInLocation = new Pawn(Color.Black)
-                }
+                        PieceInLocation=blackPawn
+                    }
             };
-       
 
             //When
-            bool result = pawn.CanMove(
+            bool result = whitePawn.CanMove(
                 StartingColumn: Column.A,
                 StartingRow: Row.First,
                 DestinationColumn: Column.B,
-                DestinationRow: Row.Second);
+                DestinationRow: Row.Second,
+                HousesList: housesList);
+
             //Then
             Assert.True(result);
         }
 
-        
+        /*
 
         [Theory]
         [InlineData(Colore.Bianco)]

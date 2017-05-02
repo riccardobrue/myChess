@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace myChess.Models.Pieces
 {
     public interface IPiece
@@ -7,7 +9,7 @@ namespace myChess.Models.Pieces
             Row StartingRow,
             Column DestinationColumn,
             Row DestinationRow,
-            IChessBoard ChessBoard = null);
+            IEnumerable<IHouse> HousesList = null);
 
         Color Color { get; }
     }

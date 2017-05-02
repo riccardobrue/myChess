@@ -18,7 +18,7 @@ namespace myChess.Tests
         house2.PieceInLocation = new Pawn(Color.Black);
         
         //Then
-        Assert.Equal(Color.White, house1.PieceInLocation.Color);
+        Assert.Equal(Color.Black, house1.PieceInLocation.Color);
         Assert.Equal(Color.Black, house2.PieceInLocation.Color);
 
         }

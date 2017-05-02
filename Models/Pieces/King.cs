@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace myChess.Models.Pieces
 {
@@ -23,11 +24,11 @@ namespace myChess.Models.Pieces
             Row StartingRow,
             Column DestinationColumn,
             Row DestinationRow,
-            IChessBoard ChessBoard = null)
+            IEnumerable<IHouse> HousesList = null)
         {
             var columnDifference = (int)StartingColumn - (int)DestinationColumn;
             var rowDifference = (int)StartingRow - (int)DestinationRow;
-            
+
             if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if (Math.Abs(columnDifference) <= 1 && Math.Abs(rowDifference) <= 1)
