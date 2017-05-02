@@ -48,9 +48,6 @@ namespace myChess.Tests
             Assert.False(result, type.Name);
         }
 
-        //----------------------------------------------
-        //----------------------------------------------
-        //----------------------------------------------
 
         [Fact]
         public void PawnCanMoveDiagonallyIfCapturesAPiece()
@@ -79,6 +76,61 @@ namespace myChess.Tests
 
             //Then
             Assert.True(result);
+        }
+
+
+        [Fact]
+        public void PawnCannotMoveForwardIfSomethingIsInFrontOfIt()
+        {
+            //Given
+            var pawn = new Pawn(Color.White);
+            IEnumerable<IHouse> housesList = new List<House> {
+            new House(Column.A,Row.First){
+                PieceInLocation = pawn
+            },
+            new House(Column.A,Row.Second){
+                PieceInLocation = new Pawn(Color.Black)
+            }
+            };
+            //When
+            bool result = pawn.CanMove(
+                StartingColumn: Column.A,
+                StartingRow: Row.First,
+                DestinationColumn: Column.A,
+                DestinationRow: Row.Second,
+                HousesList: housesList);
+            //Then
+            Assert.False(result);
+        }
+
+        //----------------------------------------------
+        //----------------------------------------------
+        //----------------------------------------------
+
+        [Fact]
+        public void PawnCannotMoveForwardIfSomeHouseIsOccupied()
+        {
+            //Given
+            var pawn = new Pawn(Color.White);
+            IEnumerable<IHouse> housesList = new List<House> {
+            new House(Column.A,Row.Second){
+                PieceInLocation = pawn
+            },
+            new House(Column.A,Row.Third){
+                PieceInLocation = new Pawn(Color.White)
+            },
+            new House(Column.A,Row.Fourth)
+            };
+
+            //When
+            bool result = pawn.CanMove(
+                StartingColumn: Column.A,
+                StartingRow: Row.Second,
+                DestinationColumn: Column.A,
+                DestinationRow: Row.Fourth,
+                HousesList: housesList);
+            //Then
+            Assert.False(result);
         }
 
         /*
@@ -1248,56 +1300,8 @@ namespace myChess.Tests
         }
 
        
-        [Fact]
-        public void IlPedoneNonPuoMuovereSeHaQualcunoDavanti()
-        {
-            //Given
-            var pedone = new Pedone(Colore.Bianco);
-            IEnumerable<ICasa> listaCase = new List<Casa> {
-            new Casa(Colonna.A,Traversa.Prima){
-                PezzoPresente = pedone
-            },
-            new Casa(Colonna.A,Traversa.Seconda){
-                PezzoPresente = new Pedone(Colore.Bianco)
-            }
-        };
-            //When
-            bool esito = pedone.PuòMuovere(
-                colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Prima,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Seconda,
-                listaCase: listaCase
-            );
-            //Then
-            Assert.False(esito);
-        }
-
-        [Fact]
-        public void IlPedoneNonPuoMuovereDiDueCaseInAvantiSeCaseNelPercorsoSonoOccupate()
-        {
-            //Given
-            var pedone = new Pedone(Colore.Bianco);
-            IEnumerable<ICasa> listaCase = new List<Casa> {
-            new Casa(Colonna.A,Traversa.Seconda){
-                PezzoPresente = pedone
-            },
-            new Casa(Colonna.A,Traversa.Terza){
-                PezzoPresente = new Pedone(Colore.Bianco)
-            },
-            new Casa(Colonna.A, Traversa.Quarta)
-        };
-            //When
-            bool esito = pedone.PuòMuovere(
-                colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Seconda,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Quarta,
-                listaCase: listaCase
-            );
-            //Then
-            Assert.False(esito);
-        }
+    
+       
 
         [Fact]
         public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoObliquo()

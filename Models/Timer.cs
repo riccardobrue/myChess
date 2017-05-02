@@ -49,30 +49,11 @@ namespace myChess.Models
             Start();
         }
 
-        //public variables
-        public TimeSpan TimeLeftPlayerBlack
+         public TimeSpan TimeLeftPlayerWhite
         {
             get
             {
-                if (!paused && playerTurn == PlayerTurn.Player1Turn)
-                {
-                    //TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
-                    TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
-                }
-
-                return timeLeftPlayerBlack;
-            }
-            private set
-            {
-                timeLeftPlayerBlack = value;
-            }
-        }
-
-        public TimeSpan TimeLeftPlayerWhite
-        {
-            get
-            {
-                if (!paused && playerTurn == PlayerTurn.Player2Turn)
+                if (!paused && playerTurn == PlayerTurn.PlayerWhiteTurn)
                 {
                     //TimeLeftPlayer2 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
                     TimeLeftPlayerWhite = timeLeftPlayerWhite - (DateTime.Now - startingTime);
@@ -86,6 +67,27 @@ namespace myChess.Models
             }
         }
 
+
+        //public variables
+        public TimeSpan TimeLeftPlayerBlack
+        {
+            get
+            {
+                if (!paused && playerTurn == PlayerTurn.PlayerBlackTurn)
+                {
+                    //TimeLeftPlayer1 = TimeSpan.FromMinutes(InitialTimeInMins) - (DateTime.Now - startingTime);
+                    TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
+                }
+
+                return timeLeftPlayerBlack;
+            }
+            private set
+            {
+                timeLeftPlayerBlack = value;
+            }
+        }
+
+       
 
 
         public PlayerTurn CurrentPlayerTurn
@@ -110,7 +112,6 @@ namespace myChess.Models
         public void TurnOff()
         {
             turnedOn = false;
-            throw new NotImplementedException();
         }
         public void Pause()
         {
@@ -118,13 +119,13 @@ namespace myChess.Models
             {
                 return;
             }
-            if (playerTurn == PlayerTurn.Player1Turn)
+            if (playerTurn == PlayerTurn.PlayerWhiteTurn)
             {
-                TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
+                TimeLeftPlayerWhite = timeLeftPlayerWhite - (DateTime.Now - startingTime);
             }
             else
             {
-                TimeLeftPlayerWhite = timeLeftPlayerWhite - (DateTime.Now - startingTime);
+                TimeLeftPlayerBlack = timeLeftPlayerBlack - (DateTime.Now - startingTime);
             }
             paused = true;
 
@@ -147,20 +148,20 @@ namespace myChess.Models
             {
                 throw new InvalidOperationException();
             }
-            TimeLeftPlayerBlack = initialTime;
             TimeLeftPlayerWhite = initialTime;
+            TimeLeftPlayerBlack = initialTime;
             paused = true;
-            playerTurn = PlayerTurn.Player1Turn;
+            playerTurn = PlayerTurn.PlayerWhiteTurn;
         }
 
         public void SwitchPlayerTurn()
         {
             Pause();
-            if (CurrentPlayerTurn == PlayerTurn.Player1Turn)
+            if (CurrentPlayerTurn == PlayerTurn.PlayerWhiteTurn)
             {
-                CurrentPlayerTurn = PlayerTurn.Player2Turn;
+                CurrentPlayerTurn = PlayerTurn.PlayerBlackTurn;
             }
-            else { CurrentPlayerTurn = PlayerTurn.Player1Turn; }
+            else { CurrentPlayerTurn = PlayerTurn.PlayerWhiteTurn; }
             Start();
         }
 
