@@ -26,7 +26,6 @@ namespace myChess.Tests
             Assert.True(result);
         }
 
-
         [Theory]
         [InlineData(typeof(Bishop))]
         [InlineData(typeof(King))]
@@ -47,7 +46,6 @@ namespace myChess.Tests
             //Then
             Assert.False(result, type.Name);
         }
-
 
         [Fact]
         public void PawnCanMoveDiagonallyIfCapturesAPiece()
@@ -78,7 +76,6 @@ namespace myChess.Tests
             Assert.True(result);
         }
 
-
         [Fact]
         public void PawnCannotMoveForwardIfSomethingIsInFrontOfIt()
         {
@@ -103,12 +100,8 @@ namespace myChess.Tests
             Assert.False(result);
         }
 
-        //----------------------------------------------
-        //----------------------------------------------
-        //----------------------------------------------
-
         [Fact]
-        public void PawnCannotMoveForwardIfSomeHouseIsOccupied()
+        public void PawnCannotMoveForwardIfSomeHouseIsOccupiedInFrontOfIt()
         {
             //Given
             var pawn = new Pawn(Color.White);
@@ -132,6 +125,10 @@ namespace myChess.Tests
             //Then
             Assert.False(result);
         }
+
+        //----------------------------------------------
+        //----------------------------------------------
+        //----------------------------------------------
 
         /*
 
