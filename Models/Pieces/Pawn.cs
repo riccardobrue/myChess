@@ -4,29 +4,35 @@ using System.Linq;
 
 namespace myChess.Models.Pieces
 {
-    public class Pawn : IPiece
+    public class Pawn : Piece
     {
-        private readonly Color color;
-        public Pawn(Color color)
+        public Pawn(Color color) : base(color) { }
+
+        public override string defaultAbstractMethodMustBeOverrided()
         {
-            this.color = color;
+            return "";
         }
 
-        public Color Color
-        {
-            get
-            {
-                return color;
-            }
-        }
 
-        public bool CanMove(
+        public override bool CanMove(
             Column StartingColumn,
             Row StartingRow,
             Column DestinationColumn,
             Row DestinationRow,
             IEnumerable<IHouse> HousesList = null)
         {
+
+            bool canMove = base.CanMove(StartingColumn,
+                StartingRow,
+                DestinationColumn,
+                DestinationRow,
+                HousesList);
+            if (!canMove)
+            {
+                return false;
+            }
+
+
             var columnDifference = (int)StartingColumn - (int)DestinationColumn;
             var rowDifference = (int)StartingRow - (int)DestinationRow;
 
@@ -116,13 +122,25 @@ namespace myChess.Models.Pieces
             {
                 return false;
             }
+        }
 
+        public override string ToString()
+        {
+            return $"I am a {this.Color} pawn - {base.ToString()}";
+        }
 
+        public override bool Equals(object otherObject)
+        {
+            if (!(otherObject is Pawn))
+            {
+                return false;
+            }
+            return ((Pawn)otherObject)?.Color == this.Color;
+        }
 
-
-
-
-
+        public override int GetHashCode()
+        {
+            return Color.GetHashCode();
         }
     }
 }
