@@ -3,33 +3,32 @@ using System.Collections.Generic;
 
 namespace myChess.Models.Pieces
 {
-    public class Knight : IPiece
+    public class Knight : Piece
     {
-        private readonly Color color;
-        public Knight(Color color)
+        public Knight(Color color) : base(color)
         {
-            this.color = color;
         }
 
-        public Color Color
-        {
-            get
-            {
-                return color;
-            }
-        }
-
-        public bool CanMove(
+        public override bool CanMove(
             Column StartingColumn,
             Row StartingRow,
             Column DestinationColumn,
             Row DestinationRow,
             IEnumerable<IHouse> HousesList = null)
         {
+
+            bool canMove = base.CanMove(StartingColumn,
+                StartingRow,
+                DestinationColumn,
+                DestinationRow,
+                HousesList);
+            if (!canMove)
+            {
+                return false;
+            }
+
             var columnDifference = (int)StartingColumn - (int)DestinationColumn;
             var rowDifference = (int)StartingRow - (int)DestinationRow;
-            
-            if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if (Math.Abs(rowDifference) == 2)
             {

@@ -8,10 +8,12 @@ namespace myChess.Models.Pieces
     {
         public Pawn(Color color) : base(color) { }
 
+        /*
         public override string defaultAbstractMethodMustBeOverrided()
         {
             return "";
         }
+        */
 
 
         public override bool CanMove(
@@ -39,7 +41,6 @@ namespace myChess.Models.Pieces
             bool sameColumn = StartingColumn == DestinationColumn;
             int rowsDistance;
 
-            if (columnDifference == 0 && rowDifference == 0) { return false; }
 
             if (Color == Color.White)
             {

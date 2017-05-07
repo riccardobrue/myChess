@@ -41,9 +41,9 @@ namespace myChess
             dictionary.Add(pawn2, "Riccardo");
 
             Piece pawn3 = new Pawn(Color.White);
-            pawn3.defaultMethod();
-            pawn3.defaultAbstractMethodMustBeOverrided();
-            pawn3.defaultMethodCanBeOverrided();
+            //pawn3.defaultMethod();
+            //pawn3.defaultAbstractMethodMustBeOverrided();
+            //pawn3.defaultMethodCanBeOverrided();
 
 
 

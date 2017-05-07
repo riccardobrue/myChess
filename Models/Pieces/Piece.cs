@@ -13,9 +13,9 @@ namespace myChess.Models.Pieces
 
         //----------------------------------------
 
-        public string defaultMethod() { return ""; }
-        public virtual string defaultMethodCanBeOverrided() { return ""; }
-        public abstract string defaultAbstractMethodMustBeOverrided();
+        //public string defaultMethod() { return ""; }
+        //public virtual string defaultMethodCanBeOverrided() { return ""; }
+        //public abstract string defaultAbstractMethodMustBeOverrided();
 
          //----------------------------------------
 
