@@ -37,8 +37,16 @@ namespace myChess.Models
 
         public void AddMovement(string movement)
         {
-           
-           var coordinates=movement.Split(' ');
+            Coordinate startingHouse = HouseCoordinatesInterpreter(movement.Substring(0, 2));
+            Coordinate destinationHouse = HouseCoordinatesInterpreter(movement.Substring(4, 2));
+        }
+
+        internal Coordinate HouseCoordinatesInterpreter(string house)
+        {
+            Enum.TryParse<Column>(house.Substring(0, 1), out Column column);
+            int.TryParse(house.Substring(1, 1), out int rowInt);
+            Row row = (Row)rowInt;
+            return new Coordinate(column, row);
 
         }
 

@@ -39,11 +39,22 @@ namespace myChess.Tests
             Assert.NotEqual(null, table.ChessBoard);
             Assert.NotEqual(null, table.Timer);
             Assert.False(table.Timer.InPause);
-
-
-
-
         }
 
+
+        [Fact]
+        public void TheTableMustInterpretCoordinates()
+        {
+            //Given
+
+            Table table = new Table(null, null);
+            //When
+            Coordinate coordinate = table.HouseCoordinatesInterpreter("A4");
+
+            //Then
+            Assert.Equal(Row.Fourth, coordinate.Row);
+            Assert.Equal(Column.A, coordinate.Column);
+
+        }
     }
 }
