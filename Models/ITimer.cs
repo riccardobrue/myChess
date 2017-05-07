@@ -17,6 +17,7 @@ namespace myChess.Models
         void Reset();
         void Pause();
         void SwitchPlayerTurn();
+        bool InPause { get; }
 
         //events
         event EventHandler<Color> TimeIsUp;

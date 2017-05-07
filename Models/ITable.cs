@@ -5,14 +5,13 @@ namespace myChess.Models
 
     public interface ITable
     {
-        void ReceivePlayers();
+        void ReceivePlayers(string nameWhitePlayer, string nameBlackPlayer);
         Dictionary<Color, IPlayer> Players { get; }
+        void StartMatch();
+        IChessBoard ChessBoard { get; }
+        ITimer Timer { get; }
 
-        IPlayer Player1 { get; set; }
-        IPlayer Player2 { get; set; }
-
-        IChessBoard ChessBoard { get; set; }
-
+        void AddMovement(string movement);
 
     }
 

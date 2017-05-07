@@ -21,7 +21,7 @@ namespace myChess.Models
         public Timer() : this(TimeSpan.FromMinutes(initialDefaultTime)) { }
         public Timer(TimeSpan initialTime)
         {
-            paused=true;
+            paused = true;
             this.initialTime = initialTime;
             sysTimer = new System.Threading.Timer(
                 checkTimeLeft,
@@ -49,7 +49,7 @@ namespace myChess.Models
             Start();
         }
 
-         public TimeSpan TimeLeftPlayerWhite
+        public TimeSpan TimeLeftPlayerWhite
         {
             get
             {
@@ -87,7 +87,7 @@ namespace myChess.Models
             }
         }
 
-       
+
 
 
         public PlayerTurn CurrentPlayerTurn
@@ -99,6 +99,14 @@ namespace myChess.Models
             set
             {
                 playerTurn = value;
+            }
+        }
+
+        public bool InPause
+        {
+            get
+            {
+                return paused;
             }
         }
 
@@ -170,7 +178,8 @@ namespace myChess.Models
         public event EventHandler<Color> TimeIsUp;
 
         //override methods
-        public override string ToString(){
+        public override string ToString()
+        {
             return $"Timer[{this.initialTime}]";
         }
     }

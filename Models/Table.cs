@@ -5,22 +5,45 @@ namespace myChess.Models
 {
     public class Table : ITable
     {
-        public IPlayer Player1 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IPlayer Player2 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IChessBoard ChessBoard { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public IChessBoard ChessBoard { get; private set; }
 
-        public void ReceivePlayers()
+        public ITimer Timer { get; private set; }
+
+        public Table(IChessBoard chessBoard, ITimer timer)
         {
-            Players=new Dictionary<Color, IPlayer>();
-            Players.Add(Color.White,new Player());
-            Players.Add(Color.Black,new Player());
+            ChessBoard = chessBoard;
+            Timer = timer;
         }
 
-        public Dictionary<Color, IPlayer> Players{
-            get;
-            private set;
+        public void ReceivePlayers(string nameWhitePlayer, string nameBlackPlayer)
+        {
+            Players = new Dictionary<Color, IPlayer>();
+            Players.Add(Color.White, new Player(nameWhitePlayer));
+            Players.Add(Color.Black, new Player(nameBlackPlayer));
         }
+
+        public void StartMatch()
+        {
+            if (Players == null)
+            {
+                throw new InvalidOperationException("You must declare player names");
+            }
+            Timer.TurnOn();
+            Timer.Start();
+
+
+        }
+
+        public void AddMovement(string movement)
+        {
+           
+           var coordinates=movement.Split(' ');
+
+        }
+
+        public Dictionary<Color, IPlayer> Players { get; private set; }
+
 
     }
 }
