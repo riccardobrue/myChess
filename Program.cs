@@ -12,8 +12,8 @@ namespace myChess
     {
         static void Main(string[] args)
         {
-            //SimpleXUnitRunner.SimpleXUnit.RunTests();
-            //Console.ReadKey();
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
 
             Dictionary<int, IChessBoard> matches = new Dictionary<int, IChessBoard>();
             int counter = 1;
