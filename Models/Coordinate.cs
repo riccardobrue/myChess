@@ -2,7 +2,7 @@ namespace myChess.Models
 {
     public struct Coordinate
     {
-        public Coordinate(Column column, Row row)
+        public Coordinate(Row row, Column column)
         {
             Column = column;
             Row = row;

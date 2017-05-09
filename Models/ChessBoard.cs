@@ -92,6 +92,10 @@ namespace myChess.Models
             {
                 return housesList[(int)column - 1 + (((int)row - 1) * 8)];
             }
+            set
+            {
+                housesList[(int)column - 1 + (((int)row - 1) * 8)] = value;
+            }
         }
 
         public IEnumerable<IHouse> Houses

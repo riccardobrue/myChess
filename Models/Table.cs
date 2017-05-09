@@ -46,7 +46,7 @@ namespace myChess.Models
         public void AddMovement(string movement)
         {
             Coordinate starting = HouseCoordinatesInterpreter(movement.Substring(0, 2));
-            Coordinate destination = HouseCoordinatesInterpreter(movement.Substring(4, 2));
+            Coordinate destination = HouseCoordinatesInterpreter(movement.Substring(3, 2));
 
             IHouse startingHouse = ChessBoard[starting.Column, starting.Row];
             IHouse destinationHouse = ChessBoard[destination.Column, destination.Row];
@@ -91,12 +91,21 @@ namespace myChess.Models
 
         internal Coordinate HouseCoordinatesInterpreter(string house)
         {
+            /*
             Enum.TryParse<Column>(house.Substring(0, 1), out Column column);
             int.TryParse(house.Substring(1, 1), out int rowInt);
             Row row = (Row)rowInt;
-            return new Coordinate(column, row);
+            return new Coordinate(column, row);*/
+
+            bool ParseColumnResult = Enum.TryParse<Column>(house.Substring(0, 1), out Column column);
+            bool ParseRowResult = Enum.TryParse<Row>(house.Substring(1, 1), out Row row);
+            if(!ParseColumnResult || !ParseRowResult) {
+                throw new InvalidOperationException("Input errato");
+            }
+            return new Coordinate(row, column);
 
         }
+
 
         public Dictionary<Color, IPlayer> Players { get; private set; }
 

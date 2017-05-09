@@ -185,8 +185,9 @@ namespace myChess
                     error = false;
                     table.AddMovement(movement);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     error = true;
                     autoPlay = false;
                 }
