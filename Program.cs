@@ -12,6 +12,7 @@ namespace myChess
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             //SimpleXUnitRunner.SimpleXUnit.RunTests();
             /*
             Console.ReadKey();
