@@ -17,6 +17,7 @@ namespace myChess.Models
         private TimeSpan timeLeftPlayerWhite;
         private bool paused, turnedOn;
 
+
         //constructor
         public Timer() : this(TimeSpan.FromMinutes(initialDefaultTime)) { }
         public Timer(TimeSpan initialTime)
@@ -90,15 +91,30 @@ namespace myChess.Models
 
 
 
-        public PlayerTurn CurrentPlayerTurn
+        public Color CurrentPlayerTurn
         {
             get
             {
-                return playerTurn;
+                if (playerTurn == PlayerTurn.PlayerWhiteTurn)
+                {
+
+                    return Color.White;
+                }
+                else
+                {
+                    return Color.Black;
+                }
             }
             set
             {
-                playerTurn = value;
+                if (value == Color.White)
+                {
+                    playerTurn = PlayerTurn.PlayerWhiteTurn;
+                }
+                else
+                {
+                    playerTurn = PlayerTurn.PlayerBlackTurn;
+                }
             }
         }
 
@@ -165,11 +181,11 @@ namespace myChess.Models
         public void SwitchPlayerTurn()
         {
             Pause();
-            if (CurrentPlayerTurn == PlayerTurn.PlayerWhiteTurn)
+            if (CurrentPlayerTurn == Color.White)
             {
-                CurrentPlayerTurn = PlayerTurn.PlayerBlackTurn;
+                CurrentPlayerTurn = Color.Black;
             }
-            else { CurrentPlayerTurn = PlayerTurn.PlayerWhiteTurn; }
+            else { CurrentPlayerTurn = Color.White; }
             Start();
         }
 

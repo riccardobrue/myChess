@@ -12,5 +12,8 @@ namespace myChess.Models.Pieces
             IEnumerable<IHouse> HousesList = null);
 
         Color Color { get; }
+
+
+        char Character { get; }
     }
 }

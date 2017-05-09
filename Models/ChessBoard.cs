@@ -50,7 +50,7 @@ namespace myChess.Models
             {
                 house.PieceInLocation = new Pawn(Color.Black);
             }
-            else if (row == Row.First || row==Row.Eighth)
+            else if (row == Row.First || row == Row.Eighth)
             {
                 Color color = (row == Row.First) ? Color.White : Color.Black;
 
@@ -101,6 +101,30 @@ namespace myChess.Models
                 return housesList;
             }
         }
+
+
+
+        public bool KingIsAlive(Color color)
+        {
+            try
+            {
+                Houses.Single(house => house.PieceInLocation is King
+                && house.PieceInLocation.Color == color);
+                return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                return false;
+            }
+
+        }
+
+        public void MovePiece(IHouse startingHouse, IHouse destinationHouse)
+        {
+            destinationHouse.PieceInLocation = startingHouse.PieceInLocation;
+            startingHouse.PieceInLocation = null;
+        }
+
 
     }
 }

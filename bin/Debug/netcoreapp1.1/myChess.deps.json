@@ -1,17 +1,124 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "2542ecac7aa538b70bc65b4afd78cd566db7046c"
+    "signature": "c3425c1fac9c83e39ba36ae3eab8c696b95e263a"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "mychess/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Sqlite": "1.1.1",
           "SimpleXUnit": "0.2.0"
         },
         "runtime": {
           "myChess.dll": {}
+        }
+      },
+      "microsoft.data.sqlite/1.1.0": {
+        "dependencies": {
+          "SQLite": "3.13.0",
+          "System.Data.Common": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.Data.Sqlite.dll": {}
+        }
+      },
+      "microsoft.entityframeworkcore/1.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Memory": "1.1.1",
+          "Microsoft.Extensions.DependencyInjection": "1.1.0",
+          "Microsoft.Extensions.Logging": "1.1.1",
+          "Remotion.Linq": "2.1.1",
+          "System.Interactive.Async": "3.0.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
+        }
+      },
+      "microsoft.entityframeworkcore.relational/1.1.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.1.1",
+          "System.Data.Common": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll": {}
+        }
+      },
+      "microsoft.entityframeworkcore.sqlite/1.1.1": {
+        "dependencies": {
+          "Microsoft.Data.Sqlite": "1.1.0",
+          "Microsoft.EntityFrameworkCore.Relational": "1.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Sqlite.dll": {}
+        }
+      },
+      "microsoft.extensions.caching.abstractions/1.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.Caching.Abstractions.dll": {}
+        }
+      },
+      "microsoft.extensions.caching.memory/1.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "1.1.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Microsoft.Extensions.Options": "1.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.Extensions.Caching.Memory.dll": {}
+        }
+      },
+      "microsoft.extensions.dependencyinjection/1.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.dll": {}
+        }
+      },
+      "microsoft.extensions.dependencyinjection.abstractions/1.1.0": {
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "microsoft.extensions.logging/1.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.dll": {}
+        }
+      },
+      "microsoft.extensions.logging.abstractions/1.1.1": {
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Abstractions.dll": {}
+        }
+      },
+      "microsoft.extensions.options/1.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Microsoft.Extensions.Primitives": "1.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.Options.dll": {}
+        }
+      },
+      "microsoft.extensions.primitives/1.1.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
+      "remotion.linq/2.1.1": {
+        "runtime": {
+          "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
       "simplexunit/0.2.0": {
@@ -21,6 +128,41 @@
         },
         "runtime": {
           "lib/netstandard1.6/SimpleXUnit.dll": {}
+        }
+      },
+      "sqlite/3.13.0": {
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libsqlite3.so": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/osx-x64/native/libsqlite3.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native"
+          },
+          "runtimes/win7-x64/native/sqlite3.dll": {
+            "rid": "win7-x64",
+            "assetType": "native"
+          },
+          "runtimes/win7-x86/native/sqlite3.dll": {
+            "rid": "win7-x86",
+            "assetType": "native"
+          }
+        }
+      },
+      "system.data.common/4.3.0": {
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "system.interactive.async/3.0.0": {
+        "runtime": {
+          "lib/netstandard1.0/System.Interactive.Async.dll": {}
+        }
+      },
+      "system.runtime.compilerservices.unsafe/4.3.0": {
+        "runtime": {
+          "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll": {}
         }
       },
       "xunit/2.2.0": {
@@ -77,12 +219,131 @@
       "serviceable": false,
       "sha512": ""
     },
+    "microsoft.data.sqlite/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C29PKXWXacIiTDwO0nI5xRC4LSTAsOQJ8HgdHXUeviPTJq1wsJyK6m+W6k60vXwxL6ScnG/3vck3ma1gd1Ks2A==",
+      "path": "microsoft.data.sqlite/1.1.0",
+      "hashPath": "microsoft.data.sqlite.1.1.0.nupkg.sha512"
+    },
+    "microsoft.entityframeworkcore/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ue761RjE+n39wVJHF7BE8C/X2VjLglYRxZD85EU0GCaO7nM4w2BblyK++hdGN4RQXz8SBTw2OtnxwgbjLvrn+g==",
+      "path": "microsoft.entityframeworkcore/1.1.1",
+      "hashPath": "microsoft.entityframeworkcore.1.1.1.nupkg.sha512"
+    },
+    "microsoft.entityframeworkcore.relational/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tXVtPQ0O8GNMd6/dk0FVcpwtYXFK+auMuvFFTffQZRkp3AmdeWbVEeAABbqUNLqqqip/xA3BbTCx43pAUSzOrg==",
+      "path": "microsoft.entityframeworkcore.relational/1.1.1",
+      "hashPath": "microsoft.entityframeworkcore.relational.1.1.1.nupkg.sha512"
+    },
+    "microsoft.entityframeworkcore.sqlite/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lj5oUKp6vrkwi3iji0F83kvdrEUUrlW3JRvE8TgWiZDPXIZBN//V8qKXtpNCq7UfS5VR+gIX/hjUMdKNpFsHTg==",
+      "path": "microsoft.entityframeworkcore.sqlite/1.1.1",
+      "hashPath": "microsoft.entityframeworkcore.sqlite.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.caching.abstractions/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-thZuFu25ckVihXBj8Fc/6zj3DSFoUefNYYZEFHPDy9G6qRRFGTOjY/83UMjsorbnqzKLbUB34ktdArngVcaM+w==",
+      "path": "microsoft.extensions.caching.abstractions/1.1.1",
+      "hashPath": "microsoft.extensions.caching.abstractions.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.caching.memory/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IwOXPRXP8K/5nhjbrHzdocitlDKqd4Q3Odg2u3oKEuWVwXQAPaIDa8P7bB/en3/+JIIHh6zRHpmjWxGYOTd/Gg==",
+      "path": "microsoft.extensions.caching.memory/1.1.1",
+      "hashPath": "microsoft.extensions.caching.memory.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.dependencyinjection/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ht7sKyFALrkPRTa0MRqrDtO28tObtQZdy4OSsE2dmbgIwHa2HfdIfBF66mafOh/81/QC6SIHXygxgnaWAHF+dw==",
+      "path": "microsoft.extensions.dependencyinjection/1.1.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.1.1.0.nupkg.sha512"
+    },
+    "microsoft.extensions.dependencyinjection.abstractions/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pZs/hriuXyD7U8mF/YSaQ2cXXFEHLpy8KZZJJ99sTe502PpSYd1bo92pW2wZTOtoZ99fXqqV7IQRcjyA4ogEzw==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/1.1.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.1.1.0.nupkg.sha512"
+    },
+    "microsoft.extensions.logging/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xbyd6zHnoy/duQFuXtAeA10Y1O8uXJXlD9/WEBiHJJ2JD9nJFntlzOmUU9znQRAem83uuyrINpO7rWqr12tzPQ==",
+      "path": "microsoft.extensions.logging/1.1.1",
+      "hashPath": "microsoft.extensions.logging.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.logging.abstractions/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-91PMvQMXctfggJ8IchZ/NmunPnrbh/T2/ENxx6arzb4TGze+ptihv7m26VwKUxcchN2TRGPSidBw319BY+CgCg==",
+      "path": "microsoft.extensions.logging.abstractions/1.1.1",
+      "hashPath": "microsoft.extensions.logging.abstractions.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.options/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VzHLr/AjUmiOP3uqNHLGyFTUVX6n6j2nfRqEX9M2vlMyqNMvn3qcaWTp9o3XbDFcrZK13NyqTiluF1RIVDhcqg==",
+      "path": "microsoft.extensions.options/1.1.1",
+      "hashPath": "microsoft.extensions.options.1.1.1.nupkg.sha512"
+    },
+    "microsoft.extensions.primitives/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2BqaSq+6zEHUHJnpNfDosNyzwly6bG20P6Mhs+3kPp+V7FM9VTSvaJAjanTXRmrkpJxtaXIX+7sQDiBz24BLoQ==",
+      "path": "microsoft.extensions.primitives/1.1.0",
+      "hashPath": "microsoft.extensions.primitives.1.1.0.nupkg.sha512"
+    },
+    "remotion.linq/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FuSBZxWvyYQs/300B4QKAtsnGfEQz6UGXz27WVmEZs/s+JPg8/BoSSVKqXzFBhnXGaC9zPBLwvgXXe0olbOkDw==",
+      "path": "remotion.linq/2.1.1",
+      "hashPath": "remotion.linq.2.1.1.nupkg.sha512"
+    },
     "simplexunit/0.2.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-biLQ4EOg4wT4vlt0QU6hfp2vT/T7a8Dy+4i2kaPwSUOzyFzufcFRzk3CGYpJ8PCPXA8OHklmyBGucTWDxyfrgQ==",
       "path": "simplexunit/0.2.0",
       "hashPath": "simplexunit.0.2.0.nupkg.sha512"
+    },
+    "sqlite/3.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mTNFEJLYcH3hpMg6pecIR+g9PcKfHzM2CZMkHNBa9m42jZ2OH3V0ltTitlk5T/BWHYimXuuZ3779tJC3RAqizw==",
+      "path": "sqlite/3.13.0",
+      "hashPath": "sqlite.3.13.0.nupkg.sha512"
+    },
+    "system.data.common/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6Rq2ti58LZCUQw4RCX7lr3wyzPTtHo4czKlSqacvomm2gOFrtRW79x3S0foBRrmKfF6HNEm00jvoLfp4j/Zznw==",
+      "path": "system.data.common/4.3.0",
+      "hashPath": "system.data.common.4.3.0.nupkg.sha512"
+    },
+    "system.interactive.async/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IrJ685jifTxMORIYaxjC/KCFL5K3Rs6IYizWfa2qpM0lHaHInslNW38hR8sHU4b9vcqYdB6aCvHYaknhNfjS4w==",
+      "path": "system.interactive.async/3.0.0",
+      "hashPath": "system.interactive.async.3.0.0.nupkg.sha512"
+    },
+    "system.runtime.compilerservices.unsafe/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9uWMSf8P+rs2+wHe64RsFf5+HzcEHUHGm79EIgMXN9HeCdqxyQvD+Zi16KDBx1xe+DOf6+qvOlZSTk+eoa490A==",
+      "path": "system.runtime.compilerservices.unsafe/4.3.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.3.0.nupkg.sha512"
     },
     "xunit/2.2.0": {
       "type": "package",

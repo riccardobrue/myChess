@@ -10,7 +10,7 @@ namespace myChess.Tests
         [Fact]
         public void TheTableMustHaveTwoPlayers()
         {
-            ITable table = new Table(null, null);
+            ITable table = new Table(null, null, null);
             table.ReceivePlayers("Player A", "Player B");
             Dictionary<Color, IPlayer> players = table.Players;
             Assert.Equal(2, players.Count);
@@ -30,7 +30,7 @@ namespace myChess.Tests
             //Given
             IChessBoard chessBoard = new ChessBoard();
             ITimer timer = new Timer();
-            ITable table = new Table(chessBoard, timer);
+            ITable table = new Table(chessBoard, timer, null);
             //When
             table.ReceivePlayers("Player A", "Player B");
             Dictionary<Color, IPlayer> players = table.Players;
@@ -47,7 +47,7 @@ namespace myChess.Tests
         {
             //Given
 
-            Table table = new Table(null, null);
+            Table table = new Table(null, null, null);
             //When
             Coordinate coordinate = table.HouseCoordinatesInterpreter("A4");
 

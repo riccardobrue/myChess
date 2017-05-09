@@ -61,6 +61,14 @@ namespace myChess.Models.Pieces
 
         }
 
+        public override char Character
+        {
+            get
+            {
+                return Color == Color.White ? '♞' : '♘';
+            }
+        }
+
 
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace myChess.Models
@@ -10,8 +11,12 @@ namespace myChess.Models
         void StartMatch();
         IChessBoard ChessBoard { get; }
         ITimer Timer { get; }
+        INotes Notes { get; }
 
         void AddMovement(string movement);
+        event EventHandler<Color> Victory;
+        
+        void EndMatch();
 
     }
 

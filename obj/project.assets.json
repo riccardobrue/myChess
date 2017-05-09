@@ -7802,16 +7802,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\myChess.csproj",
+      "projectUniqueName": "C:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\myChess.csproj",
       "projectName": "myChess",
-      "projectPath": "c:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\myChess.csproj",
-      "outputPath": "c:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\obj\\",
+      "projectPath": "C:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\myChess.csproj",
+      "outputPath": "C:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/myChess.dll": "c:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\bin\\placeholder\\netcoreapp1.1\\myChess.dll"
+        "lib/netcoreapp1.1/myChess.dll": "C:\\Users\\Riccardo\\Desktop\\C# Projects\\myChess\\bin\\placeholder\\netcoreapp1.1\\myChess.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {

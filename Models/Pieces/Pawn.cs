@@ -143,5 +143,14 @@ namespace myChess.Models.Pieces
         {
             return Color.GetHashCode();
         }
+
+
+        public override char Character
+        {
+            get
+            {
+                return Color == Color.White ? '♟' : '♙';
+            }
+        }
     }
 }

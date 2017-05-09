@@ -8,7 +8,7 @@ namespace myChess.Models
         //properties
         TimeSpan TimeLeftPlayerBlack { get; }
         TimeSpan TimeLeftPlayerWhite { get; }
-        PlayerTurn CurrentPlayerTurn { get; set; }
+        Color CurrentPlayerTurn { get; set; }
 
         //methods
         void TurnOn();

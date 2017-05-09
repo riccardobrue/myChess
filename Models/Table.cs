@@ -9,11 +9,12 @@ namespace myChess.Models
         public IChessBoard ChessBoard { get; private set; }
 
         public ITimer Timer { get; private set; }
-
-        public Table(IChessBoard chessBoard, ITimer timer)
+        public INotes Notes { get; private set; }
+        public Table(IChessBoard chessBoard, ITimer timer, INotes notes)
         {
             ChessBoard = chessBoard;
             Timer = timer;
+            Notes = notes;
         }
 
         public void ReceivePlayers(string nameWhitePlayer, string nameBlackPlayer)
@@ -21,6 +22,13 @@ namespace myChess.Models
             Players = new Dictionary<Color, IPlayer>();
             Players.Add(Color.White, new Player(nameWhitePlayer));
             Players.Add(Color.Black, new Player(nameBlackPlayer));
+        }
+
+        public void EndMatch()
+        {
+            Timer.Reset();
+            ChessBoard = new ChessBoard();
+            Players = null;
         }
 
         public void StartMatch()
@@ -37,9 +45,49 @@ namespace myChess.Models
 
         public void AddMovement(string movement)
         {
-            Coordinate startingHouse = HouseCoordinatesInterpreter(movement.Substring(0, 2));
-            Coordinate destinationHouse = HouseCoordinatesInterpreter(movement.Substring(4, 2));
+            Coordinate starting = HouseCoordinatesInterpreter(movement.Substring(0, 2));
+            Coordinate destination = HouseCoordinatesInterpreter(movement.Substring(4, 2));
+
+            IHouse startingHouse = ChessBoard[starting.Column, starting.Row];
+            IHouse destinationHouse = ChessBoard[destination.Column, destination.Row];
+
+
+
+            if (startingHouse.PieceInLocation == null ||
+                startingHouse.PieceInLocation?.Color != Timer.CurrentPlayerTurn ||
+                destinationHouse.PieceInLocation?.Color == Timer.CurrentPlayerTurn ||
+                startingHouse.PieceInLocation?.CanMove(starting.Column, starting.Row,
+                destination.Column, destination.Row, ChessBoard.Houses) == false
+                )
+            {
+                throw new InvalidOperationException("Mossa non valida");
+            }
+
+            ChessBoard.MovePiece(startingHouse, destinationHouse);
+            Notes.WriteMovement(movement);
+            //Check King still alive
+            Color checkDefeatedColor;
+            if (Timer.CurrentPlayerTurn == Color.White)
+            {
+                checkDefeatedColor = Color.Black;
+            }
+            else
+            {
+                checkDefeatedColor = Color.White;
+            }
+            bool reInVita = ChessBoard.KingIsAlive(checkDefeatedColor);
+            if (!reInVita)
+            {
+                Victory.Invoke(ChessBoard, Timer.CurrentPlayerTurn);
+            }
+            Timer.SwitchPlayerTurn();
+
+
+
+
         }
+
+        public event EventHandler<Color> Victory;
 
         internal Coordinate HouseCoordinatesInterpreter(string house)
         {
@@ -51,6 +99,9 @@ namespace myChess.Models
         }
 
         public Dictionary<Color, IPlayer> Players { get; private set; }
+
+
+
 
 
     }

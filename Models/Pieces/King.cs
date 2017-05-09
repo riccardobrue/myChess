@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 namespace myChess.Models.Pieces
 {
-    public class King : IPiece
+    public class King : Piece
     {
-        private readonly Color color;
-        public King(Color color)
-        {
-            this.color = color;
-        }
+        public King(Color color) : base(color) { }
 
-        public Color Color
-        {
-            get
-            {
-                return color;
-            }
-        }
-
-        public bool CanMove(
+        public override bool CanMove(
             Column StartingColumn,
             Row StartingRow,
             Column DestinationColumn,
             Row DestinationRow,
             IEnumerable<IHouse> HousesList = null)
         {
+
+            bool canMove = base.CanMove(StartingColumn,
+               StartingRow,
+               DestinationColumn,
+               DestinationRow,
+               HousesList);
+            if (!canMove)
+            {
+                return false;
+            }
+
+
             var columnDifference = (int)StartingColumn - (int)DestinationColumn;
             var rowDifference = (int)StartingRow - (int)DestinationRow;
 
@@ -41,6 +41,12 @@ namespace myChess.Models.Pieces
             }
         }
 
-
+        public override char Character
+        {
+            get
+            {
+                return Color == Color.White ? '♚' : '♔';
+            }
+        }
     }
 }

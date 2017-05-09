@@ -17,7 +17,7 @@ namespace myChess.Models.Pieces
         //public virtual string defaultMethodCanBeOverrided() { return ""; }
         //public abstract string defaultAbstractMethodMustBeOverrided();
 
-         //----------------------------------------
+        //----------------------------------------
 
         public virtual bool CanMove(
             Column StartingColumn,
@@ -36,5 +36,8 @@ namespace myChess.Models.Pieces
                 return true;
             }
         }
+
+
+        public abstract char Character { get; }
     }
 }
