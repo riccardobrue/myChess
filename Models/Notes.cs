@@ -11,11 +11,11 @@ namespace myChess.Models
             return null;
         }
 
-        public async void WriteMovement(string movementString)
+        public async void WriteMovement(Database db, TableModel table, string movementString)
         {
-            Database db = new Database();
             Movement movement = new Movement();
             movement.MovementString = movementString;
+            movement.Table = table;
             db.Movements.Add(movement);
             await db.SaveChangesAsync();
         }

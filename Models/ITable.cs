@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using myChess.Services;
 
 namespace myChess.Models
 {
@@ -13,7 +14,7 @@ namespace myChess.Models
         ITimer Timer { get; }
         INotes Notes { get; }
 
-        void AddMovement(string movement);
+        void AddMovement(Database db,string movement);
         event EventHandler<Color> Victory;
         
         void EndMatch();

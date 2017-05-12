@@ -5,6 +5,7 @@ using myChess.Extensions;
 using System.Collections.Generic;
 using myChess.Models.Pieces;
 using System.Linq;
+using myChess.Services;
 
 namespace myChess
 {
@@ -116,21 +117,28 @@ namespace myChess
         }
         */
 
-        private static void PlayMatch()
+        private async static void PlayMatch()
         {
+
+
+
+
+
+
             IChessBoard chessboard = new ChessBoard();
             ITimer timer = new Models.Timer();
             INotes notes = new Notes();
+
             ITable table = new Table(chessboard, timer, notes);
 
             bool matchInProgress = true;
             table.Victory += (sender, color) =>
-            {
-                Console.Clear();
-                Console.WriteLine($"Wins {table.Players[color].Name} ({color})!");
-                matchInProgress = false;
-                table.EndMatch();
-            };
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Wins {table.Players[color].Name} ({color})!");
+                            matchInProgress = false;
+                            table.EndMatch();
+                        };
 
             Console.Write("White player: ");
             string whitePlayer = Console.ReadLine();
@@ -145,52 +153,58 @@ namespace myChess
             bool error = false;
             bool autoPlay = false;
 
-            while (matchInProgress)
+            Database db = null;
+            using (db = new Database())
             {
+                await db.Database.EnsureCreatedAsync();
 
-                Console.Clear();
-                Color currentPlayerTurn = timer.CurrentPlayerTurn;
-                Console.WriteLine($"{table.Players[Color.White].Name} ({Color.White}) VS {table.Players[Color.Black].Name} ({Color.Black})");
-                Console.WriteLine();
-
-                Draw(chessboard);
-
-                Console.WriteLine();
-                if (error)
-                    Console.ForegroundColor = ConsoleColor.Red;
-
-                Console.Write($"Moves {table.Players[currentPlayerTurn].Name} ({currentPlayerTurn}): ");
-                Console.ForegroundColor = ConsoleColor.White;
-                string movement;
-
-                if (autoPlay)
+                while (matchInProgress)
                 {
-                    movement = GenerateMovement(chessboard, timer.CurrentPlayerTurn);
-                    Console.Write(movement);
-                    Thread.Sleep(200);
-                }
-                else
-                {
-                    movement = Console.ReadLine();
-                }
-                if (movement.Equals("auto", StringComparison.OrdinalIgnoreCase))
-                {
-                    autoPlay = true;
-                    movement = GenerateMovement(chessboard, timer.CurrentPlayerTurn);
-                    Console.Write(movement);
-                    Thread.Sleep(200);
-                }
 
-                try
-                {
-                    error = false;
-                    table.AddMovement(movement);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    error = true;
-                    autoPlay = false;
+                    Console.Clear();
+                    Color currentPlayerTurn = timer.CurrentPlayerTurn;
+                    Console.WriteLine($"{table.Players[Color.White].Name} ({Color.White}) VS {table.Players[Color.Black].Name} ({Color.Black})");
+                    Console.WriteLine();
+
+                    Draw(chessboard);
+
+                    Console.WriteLine();
+                    if (error)
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                    Console.Write($"Moves {table.Players[currentPlayerTurn].Name} ({currentPlayerTurn}): ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    string movement;
+
+                    if (autoPlay)
+                    {
+                        movement = GenerateMovement(chessboard, timer.CurrentPlayerTurn);
+                        Console.Write(movement);
+                        Thread.Sleep(200);
+                    }
+                    else
+                    {
+                        movement = Console.ReadLine();
+                    }
+                    if (movement.Equals("auto", StringComparison.OrdinalIgnoreCase))
+                    {
+                        autoPlay = true;
+                        movement = GenerateMovement(chessboard, timer.CurrentPlayerTurn);
+                        Console.Write(movement);
+                        Thread.Sleep(200);
+                    }
+
+                    try
+                    {
+                        error = false;
+                        table.AddMovement(db, movement);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        error = true;
+                        autoPlay = false;
+                    }
                 }
             }
             Console.ReadLine();

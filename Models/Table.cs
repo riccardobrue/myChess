@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using myChess.Models;
+using myChess.Services;
+
 namespace myChess.Models
 {
     public class Table : ITable
@@ -30,20 +32,22 @@ namespace myChess.Models
             ChessBoard = new ChessBoard();
             Players = null;
         }
-
+        private TableModel table = null;
         public void StartMatch()
         {
             if (Players == null)
             {
                 throw new InvalidOperationException("You must declare player names");
             }
+            table = new TableModel();
+
             Timer.TurnOn();
             Timer.Start();
 
 
         }
 
-        public void AddMovement(string movement)
+        public void AddMovement(Database db, string movement)
         {
             Coordinate starting = HouseCoordinatesInterpreter(movement.Substring(0, 2));
             Coordinate destination = HouseCoordinatesInterpreter(movement.Substring(3, 2));
@@ -64,7 +68,8 @@ namespace myChess.Models
             }
 
             ChessBoard.MovePiece(startingHouse, destinationHouse);
-            Notes.WriteMovement(movement);
+
+            Notes.WriteMovement(db, table, movement);
             //Check King still alive
             Color checkDefeatedColor;
             if (Timer.CurrentPlayerTurn == Color.White)
@@ -99,7 +104,8 @@ namespace myChess.Models
 
             bool ParseColumnResult = Enum.TryParse<Column>(house.Substring(0, 1), out Column column);
             bool ParseRowResult = Enum.TryParse<Row>(house.Substring(1, 1), out Row row);
-            if(!ParseColumnResult || !ParseRowResult) {
+            if (!ParseColumnResult || !ParseRowResult)
+            {
                 throw new InvalidOperationException("Input errato");
             }
             return new Coordinate(row, column);
