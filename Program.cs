@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using myChess.Models.Pieces;
 using System.Linq;
 using myChess.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace myChess
 {
@@ -100,14 +101,40 @@ namespace myChess
                 Console.WriteLine($"{piece.Color} - {piece.GetType().ToString()}");
             }
             */
-
-
-
-
             //Console.ReadKey();
 
-            PlayMatch();
 
+
+            //PlayMatch();
+            GetMatch(1);
+
+            Console.ReadKey();
+
+        }
+
+        private static async void GetMatch(int matchID)
+        {
+            using (Database db = new Database())
+            {
+                await db.Database.EnsureCreatedAsync();
+
+                TableModel table = await db
+                .Tables
+                .Include(t => t.Movements)
+                .Include(t => t.Timer)
+                .Where(t => t.ID == matchID)
+                .SingleOrDefaultAsync();
+
+
+                Console.WriteLine($"{table?.Timer.BlackTimeLeft}");
+                Console.WriteLine($"{table?.Timer.WhiteTimeLeft}");
+                foreach (Movement movement in table?.Movements)
+                {
+                    Console.WriteLine($"{movement.MovementString}");
+                }
+
+
+            }
         }
 
         /*

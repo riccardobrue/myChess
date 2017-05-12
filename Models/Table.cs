@@ -40,6 +40,8 @@ namespace myChess.Models
                 throw new InvalidOperationException("You must declare player names");
             }
             table = new TableModel();
+            TimerModel timerModel = new TimerModel();
+            table.Timer = timerModel;
 
             Timer.TurnOn();
             Timer.Start();

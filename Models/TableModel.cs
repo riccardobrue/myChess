@@ -6,5 +6,7 @@ namespace myChess.Models
     {
         public int ID { get; set; }
         public List<Movement> Movements { get; set; }
+        public TimerModel Timer { get; set; }
+
     }
 }

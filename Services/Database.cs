@@ -10,7 +10,8 @@ namespace myChess.Services
             this.Database.EnsureCreated();
         }
         public DbSet<Movement> Movements { get; set; }
-        public DbSet<TableModel> Tables {get;set;}
+        public DbSet<TableModel> Tables { get; set; }
+        public DbSet<TimerModel> Timers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(@"Data Source=..\..\..\ChessDB.db");
@@ -20,12 +21,20 @@ namespace myChess.Services
             //entity mapping
             modelBuilder.Entity<Movement>().ToTable("Movements").HasKey(m => m.ID);
             modelBuilder.Entity<TableModel>().ToTable("Tables").HasKey(t => t.ID);
+            modelBuilder.Entity<TimerModel>().ToTable("Timers").HasKey(t => t.ID);
 
             //relationship mapping
             modelBuilder
                 .Entity<TableModel>()
                 .HasMany(t => t.Movements)
                 .WithOne(m => m.Table)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<TableModel>()
+                .HasOne(t => t.Timer)
+                .WithOne(t => t.Table)
+                .HasForeignKey<TimerModel>(t => t.ID)
                 .IsRequired();
         }
 
